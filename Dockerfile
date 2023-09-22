@@ -19,8 +19,7 @@ COPY docker-entrypoint.sh /usr/local/bin/
 WORKDIR /app
 
 # Install Jekyll
-RUN    rm -f Gemfile.lock \
-    && gem update --system \
+RUN     gem update --system \
     && gem install jekyll \
     && gem cleanup
 
@@ -28,7 +27,8 @@ RUN    rm -f Gemfile.lock \
 RUN git clone https://github.com/wowthemesnet/jekyll-theme-memoirs.git .
 
 # Install bundle
-RUN gem install bundler \
+RUN     rm -f Gemfile.lock \
+        && gem install bundler \
     && bundle install
 
 # Make port 4000 available to the world outside this container
