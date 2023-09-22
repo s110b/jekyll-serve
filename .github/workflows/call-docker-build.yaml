@@ -2,22 +2,9 @@
 name: Docker Build
 
 on:
+  # Runs on pushes targeting the default branch
   push:
-    branches:
-      - 'main'
-    paths:
-      - 'Dockerfile'
-      - '.github/workflows/call-docker-build.yaml'
-      - 'docker-entrypoint.sh'
-  pull_request:
-    paths:
-      - 'Dockerfile'
-      - '.github/workflows/call-docker-build.yaml'
-      - 'docker-entrypoint.sh'
-
-  schedule:
-    # re-run montly to keep image fresh with upstream base images
-    - cron: '0 12 15 * *'
+    branches: ["master"]
 
 jobs:
 
@@ -27,7 +14,7 @@ jobs:
     # https://docs.github.com/en/actions/learn-github-actions/reusing-workflows
     name: Call Docker Build Jekyll
 
-    uses: bretfisher/docker-build-workflow/.github/workflows/reusable-docker-build.yaml@main
+    uses: bretfisher/docker-build-workflow/.github/workflows/reusable-docker-build.yaml@v1
 
     permissions:
       contents: read
@@ -43,38 +30,38 @@ jobs:
       dockerhub-enable: true
       ghcr-enable: true
       image-names: |
-        bretfisher/jekyll
-        ghcr.io/bretfisher/jekyll
+        s110b/jekyll
+        ghcr.io/s110b/jekyll
       platforms: linux/amd64,linux/arm64,linux/arm/v7
       target: jekyll
 
-  build-jekyll-serve-image:
-
-    # use Reusable Workflows
-    # https://docs.github.com/en/actions/learn-github-actions/reusing-workflows
-    name: Call Docker Build Jekyll-Serve
-
-    uses: bretfisher/docker-build-workflow/.github/workflows/reusable-docker-build.yaml@main
-
-    needs: build-jekyll-image
-
-    # if: github.event_name == 'push'
-
-    permissions:
-      contents: read
-      packages: write # needed to push docker image to ghcr.io
-      pull-requests: write # needed to create and update comments in PRs
-    
-    secrets:
-
-      dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
-      dockerhub-token: ${{ secrets.DOCKERHUB_TOKEN }}
-
-    with:
-      dockerhub-enable: true
-      ghcr-enable: true
-      image-names: |
-        bretfisher/jekyll-serve 
-        ghcr.io/bretfisher/jekyll-serve
-      platforms: linux/amd64,linux/arm64,linux/arm/v7
-      target: jekyll-serve
+#  build-jekyll-serve-image:
+#
+#    # use Reusable Workflows
+#    # https://docs.github.com/en/actions/learn-github-actions/reusing-workflows
+#    name: Call Docker Build Jekyll-Serve
+#
+#    uses: bretfisher/docker-build-workflow/.github/workflows/reusable-docker-build.yaml@main
+#
+#    needs: build-jekyll-image
+#
+#    # if: github.event_name == 'push'
+#
+#    permissions:
+#      contents: read
+#      packages: write # needed to push docker image to ghcr.io
+#      pull-requests: write # needed to create and update comments in PRs
+#
+#    secrets:
+#
+#      dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
+#      dockerhub-token: ${{ secrets.DOCKERHUB_TOKEN }}
+#
+#    with:
+#      dockerhub-enable: true
+#      ghcr-enable: true
+#      image-names: |
+#        bretfisher/jekyll-serve
+#        ghcr.io/bretfisher/jekyll-serve
+#      platforms: linux/amd64,linux/arm64,linux/arm/v7
+#      target: jekyll-serve
