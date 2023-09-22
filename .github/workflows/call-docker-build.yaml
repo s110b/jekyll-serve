@@ -23,8 +23,8 @@ jobs:
     
     secrets:
 
-      dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
-      dockerhub-token: ${{ secrets.DOCKERHUB_TOKEN }}
+      dockerhub-username: xiquwugou
+      dockerhub-token: dckr_pat_iKFizpU079xDqOejSDOJ1V0VWRY
 
     with:
       dockerhub-enable: true
