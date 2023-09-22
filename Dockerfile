@@ -12,7 +12,7 @@ RUN     gem update --system \
     && gem cleanup
 
 # Clone the jekyll theme
-RUN git clone https://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@github.com/s110b/vip.git .
+RUN git clone https://github.com/s110b/vip.git .
 
 # Install bundle
 RUN     rm -f Gemfile.lock \
