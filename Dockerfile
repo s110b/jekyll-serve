@@ -1,26 +1,14 @@
-FROM ruby:3.1-slim-bullseye as jekyll
+# Use a smaller base image
+FROM ruby:3.1-alpine as builder
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        build-essential \
-        git \
-        vim \
-        net-tools \
-        openssh-server \
-        wget \
-        curl \
-        iputils-ping \
-        zsh \
-    && rm -rf /var/lib/apt/lists/* \
-    && sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-COPY docker-entrypoint.sh /usr/local/bin/
+# Install necessary packages for building
+RUN apk add --no-cache build-base git
 
 WORKDIR /app
 
 # Install Jekyll
 RUN     gem update --system \
-    && gem install jekyll \
+    && gem install jekyll bundler \
     && gem cleanup
 
 # Clone the jekyll theme
@@ -28,8 +16,17 @@ RUN git clone https://github.com/wowthemesnet/jekyll-theme-memoirs.git .
 
 # Install bundle
 RUN     rm -f Gemfile.lock \
-        && gem install bundler \
-    && bundle install
+    && bundle install \
+    && rm -rf /usr/local/bundle/cache/*.gem
+
+# Start a new stage for the final image
+FROM ruby:3.1-alpine
+
+WORKDIR /app
+
+# Copy the app and its dependencies from the builder stage
+COPY --from=builder /usr/local/bundle/ /usr/local/bundle/
+COPY --from=builder /app/ /app/
 
 # Make port 4000 available to the world outside this container
 EXPOSE 4000
