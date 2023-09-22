@@ -12,7 +12,7 @@ jobs:
 
     # use Reusable Workflows
     # https://docs.github.com/en/actions/learn-github-actions/reusing-workflows
-    name: Call Docker Build Jekyll
+    name: Call Docker Build Jekyll1
 
     uses: bretfisher/docker-build-workflow/.github/workflows/reusable-docker-build.yaml@v1
 
