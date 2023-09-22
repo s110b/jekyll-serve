@@ -17,7 +17,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: gh-pages
           path: 'site'
 
     uses: bretfisher/docker-build-workflow/.github/workflows/reusable-docker-build.yaml@v1
