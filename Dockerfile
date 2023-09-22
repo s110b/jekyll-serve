@@ -15,8 +15,7 @@ RUN     gem update --system \
 RUN git clone https://github.com/s110b/vip.git .
 
 # Install bundle
-RUN     rm -f Gemfile.lock \
-    && bundle install \
+RUN     bundle install \
     && rm -rf /usr/local/bundle/cache/*.gem
 
 # Start a new stage for the final image
