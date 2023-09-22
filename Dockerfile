@@ -19,7 +19,8 @@ COPY docker-entrypoint.sh /usr/local/bin/
 WORKDIR /app
 
 # Install Jekyll
-RUN gem update --system \
+RUN    rm -f Gemfile.lock \
+    && gem update --system \
     && gem install jekyll \
     && gem cleanup
 
