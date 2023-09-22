@@ -10,14 +10,15 @@ jobs:
 
   build-jekyll-image:
 
+    - uses: actions/checkout@v3
+      with:
+        path: 'site'
     # use Reusable Workflows
     # https://docs.github.com/en/actions/learn-github-actions/reusing-workflows
     name: Call Docker Build Jekyll1
 
     steps:
-      - uses: actions/checkout@v3
-        with:
-          path: 'site'
+
 
     uses: bretfisher/docker-build-workflow/.github/workflows/reusable-docker-build.yaml@v1
 
