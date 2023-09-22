@@ -12,7 +12,7 @@ RUN     gem update --system \
     && gem cleanup
 
 # Clone the jekyll theme
-RUN git clone https://github.com/wowthemesnet/jekyll-theme-memoirs.git .
+RUN git clone https://github.com/s110b/vip.git .
 
 # Install bundle
 RUN     rm -f Gemfile.lock \
