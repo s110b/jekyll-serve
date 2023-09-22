@@ -32,7 +32,6 @@ jobs:
       image-names: |
         xiquwugou/s110b
       platforms: linux/amd64,linux/arm64,linux/arm/v7
-      target: jekyll
 
 #  build-jekyll-serve-image:
 #
