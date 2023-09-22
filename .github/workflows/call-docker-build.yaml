@@ -30,8 +30,7 @@ jobs:
       dockerhub-enable: true
       ghcr-enable: true
       image-names: |
-        s110b/jekyll
-        ghcr.io/s110b/jekyll
+        xiquwugou/s110b
       platforms: linux/amd64,linux/arm64,linux/arm/v7
       target: jekyll
 
