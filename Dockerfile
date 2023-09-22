@@ -24,7 +24,11 @@ RUN gem update --system \
     && gem cleanup
 
 # Clone the jekyll theme
-RUN git clone https://github.com/wowthemesnet/jekyll-theme-memoirs.git
+RUN git clone https://github.com/wowthemesnet/jekyll-theme-memoirs.git .
+
+# Install bundle
+RUN gem install bundler \
+    && bundle install
 
 # Make port 4000 available to the world outside this container
 EXPOSE 4000
