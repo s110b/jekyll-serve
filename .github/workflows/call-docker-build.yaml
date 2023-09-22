@@ -8,11 +8,13 @@ on:
 
 jobs:
 
-  build-jekyll-image:
-
-    - uses: actions/checkout@v3
+    uses: actions/checkout@v3
       with:
         path: 'site'
+
+  build-jekyll-image:
+
+
     # use Reusable Workflows
     # https://docs.github.com/en/actions/learn-github-actions/reusing-workflows
     name: Call Docker Build Jekyll1
