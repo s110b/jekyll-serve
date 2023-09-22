@@ -1,9 +1,9 @@
 # no version needed since 2020
 
 services:
-  jekyll:
-    image: s110b/jekyll-serve
+  s110b:
+    image: xiquwugou/s110b:latest
     volumes:
-      - .:/site
+      - .:/app
     ports:
       - '4000:4000'
