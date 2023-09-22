@@ -2,6 +2,11 @@
 
 ```shell
 
+docker-compose  up -d
+docker-compose exec s110b zsh
+
+
+
 启动docker
 
 docker run -p 4000:4000 -d xiquwugou/s110b

@@ -3,7 +3,5 @@
 services:
   s110b:
     image: xiquwugou/s110b:latest
-    volumes:
-      - .:/app
     ports:
       - '4000:4000'
