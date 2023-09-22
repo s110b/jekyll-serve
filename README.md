@@ -4,6 +4,7 @@
 * 访问地址： [http://127.0.0.1:4000](http://localhost:4000)
 * jekyll没有生成文章的命令，直接复制现有的文章改日期就ok
 * 这个镜像体积较大，因为集成了各种工具，和zsh，方便命令操作
+* *对命令做了精简，现在镜像只有160MB，之前是600多mB*
 
 两种方式：
 * 直接拉取镜像执行
@@ -12,7 +13,7 @@
 ```shell
 
 docker-compose  up -d
-docker-compose exec s110b zsh
+docker-compose exec s110b sh
 
 
 
@@ -22,7 +23,7 @@ docker run -p 4000:4000 -d xiquwugou/s110b
 
 进入zsh，执行命令
 
-docker exec -it $(docker ps --format '{{.ID}}\t{{.Image}}\t{{.Status}}' | grep 's110b' | grep 'Up' | awk '{print $1}') zsh
+docker exec -it $(docker ps --format '{{.ID}}\t{{.Image}}\t{{.Status}}' | grep 's110b' | grep 'Up' | awk '{print $1}') sh
 ```
 
 - I wanted two images, one for easy CLI (`bretfisher/jekyll`) and one for
